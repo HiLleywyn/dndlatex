@@ -111,8 +111,7 @@
         \begingroup % Ensures scope is properly handled
 
         \pgfmathtruncatemacro{\i}{\index / 3}  % Row index
-        \pgfmathtruncatemacro{\j}{mod(\index, 3)}
-        %\pgfmathtruncatemacro{\j}{\index mod 3}  % Column index
+        \pgfmathtruncatemacro{\j}{2 - mod(\index, 3)} % Mirror column for back side
 
         % Reset macros before loading new card
         \renewcommand{\cardtitle}{Useless Rock}
