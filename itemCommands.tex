@@ -1,7 +1,7 @@
 % Custom command definitions for D&D item cards
 % Add your command definitions here
 
-\newcommand{\ItemTags}[4]{% #1=item type, #2=rarity, #3=0 for no attunement, #3=1 for attunement, #3=2 for special attunement, #4=special attunement req
+\newcommand{\ItemTags}[4]{% #1=item type, #2=rarity, #3=attunement type (0=none, 1=attunement, 2=special), #4=special attunement requirement
     \ifnum#3=0
         \textbf{#1, #2 }
         \\[0.1ex]
