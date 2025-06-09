@@ -76,7 +76,7 @@
 
 
         % Include card data
-        \def\tmpFilename{cards/\filename}
+        \def\tmpFilename{cards/\filename.tex}
         \IfFileExists{\tmpFilename}{ \input{\tmpFilename} }{}
         % Draw the card
         \node[minimum width=\cardwidth, minimum height=\cardheight, draw, rectangle, fill=white, scale=1] at  ({\j * (\cardwidth + 0.12in)}, {-\i * (\cardheight + 0.02in)}) {%
@@ -123,7 +123,7 @@
 
 
         % Include card data
-        \def\tmpFilename{cards/\filename}
+        \def\tmpFilename{cards/\filename.tex}
         \IfFileExists{\tmpFilename}{ \input{\tmpFilename} }{}
 
         % Draw the card
