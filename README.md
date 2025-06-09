@@ -1,74 +1,63 @@
 # DnD Item Card LaTeX Template
 
-This is a LaTeX template for typesetting item cards (intended to print and cut) in the style of the fifth edition of the "world's greatest roleplaying game".
+A collection of LaTeX sources for printing item cards in the style of the fifth edition of "the world's greatest roleplaying game." The project packages card layouts, custom macros and example items so that you can quickly typeset professional looking handouts.
+
+![Preview of a generated page](ExamplePage.png)
+
+## Table of Contents
+- [Features](#features)
+- [Repository Layout](#repository-layout)
+- [Requirements](#requirements)
+- [Usage](#usage)
+- [Creating New Cards](#creating-new-cards)
+- [Known Issues](#known-issues)
+- [License](#license)
+- [Credits](#credits)
 
 ## Features
+- Up to nine cards per sheet with mirrored backs for double‑sided printing.
+- Item information lives in individual files for easy re‑use.
+- Backgrounds and item art are fully customizable.
+- Utility macros for item tags, flavor text, charges, spellcasting and more.
 
-* Can create (at the moment) up to 9 cards with front and back information
-* Card information is contained in their own files
-* Customizable backgrounds
+## Repository Layout
+```
+.
+├── cards/                # Card definitions (one file per item)
+├── img/                  # Background images
+├── item_pics/            # Item art
+├── dndItemCards.tex      # Main document to compile
+├── itemCommands.tex      # Macros used in card files
+├── tcolorboxSettings.tex # Layout configuration for cards
+├── ExamplePage.png       # Example output
+└── README.md             # Project documentation
+```
 
-![Preview](ExamplePage.png)
-
-## Background and Credits
-
-I was playing Moon over Graymoor with my family, and was looking a way to quickly print items that I could hand out. Many hours more than "quickly", and I had this template spun up.
-
-This template is derived from the wonderful work of `DrailNecross` and their [D&D Item Card Template](https://www.overleaf.com/latex/templates/d-and-d-item-card-template/ndfdspmmxnrn) on Overleaf.
-
-Which itself uses the [DnD 5e LaTeX Template](https://github.com/rpgtex/DND-5e-LaTeX-Template/).
-
-I have kept the images included in DrailNecross' original Overleaf project, as well as added a few others. I believe they are all copyright free, but I could be mistaken. If so, let me know and I will take them down!
+## Requirements
+This template requires a working LaTeX distribution such as TeX&nbsp;Live. `pdflatex` is recommended for compilation.
 
 ## Usage
+1. Place item artwork in `item_pics/` and create a corresponding `.tex` file under `cards/`. Each card file defines commands such as `\cardtitle`, `\cardimage` and `\carddescfront`.
+2. List the desired card file names in `\def\cardfiles{...}` within `dndItemCards.tex`.
+3. Run `pdflatex dndItemCards.tex` to produce a PDF of the card sheet.
 
-To use this template, place item images in the `item_pics` folder, and card information as `tex` files in the `cards` folder.
+### Creating New Cards
+Card files use the macros defined in `itemCommands.tex`. The most common commands are:
+- `\ItemTags{type}{rarity}{attune}{creature}` – item tags and attunement requirements.
+- `\FlavorText{flag}{text}` – italicized descriptive text.
+- `\ChargeMechanics` and `\SpellCasting` – mechanics for charged and spell‑casting items.
+- `\BonusText` and `\CurseText` – additional effects and curses.
 
-A card file looks like the following:
-```
-% Arrow of Shapechanger Slaying
-\renewcommand{\cardtitle}{Arrow of Shapechanger Slaying}
-\renewcommand{\cardimage}{item_pics/silverArrow.png}
-\renewcommand{\cardbg}{img/B1.jpg}
-\renewcommand{\carddescfront}{%
-\ItemTags{Weapon (arrow)}{Very Rare}{0}{n/a}
-            \FlavorText{1}{Dropped in the woods by a fey on the run. A silver arrowhead that is only active when affixed to a shaft and fired from a bow. This magic weapon is meant to slay a shape\-changer.\\
+See the existing files in the `cards/` directory for examples.
 
-            If a shape\-changer takes damage from the arrow, the creature must make a \textbf{DC 17 Constitution} saving throw, taking an extra \textbf{6d10 piercing damage on a failed save}, or \textbf{half as much extra damage on a successful one}.}
-             \BonusText{1}{Uses}{Once this arrow of slaying deals its extra damage to a creature, it becomes a non-magical silvered arrow.}
-}
-\renewcommand{\carddescback}{%
+## Known Issues
+- Currently limited to nine cards per sheet. Additional pages must be generated manually.
+- Descriptions do not automatically overflow from the front to the back side.
+- Slight spacing adjustments may be required when customising card sizes or graphics.
+- Background images may appear stretched when non‑standard aspect ratios are used.
 
-}
-```
-The `cardtitle` defines the item name. `cardimage` points to the image (png with alpha looks best). `cardbg` can be used to place a background. Several are provided in the `img` folder (Thanks DrailNecross~), and the default to use would be `paper.jpg`. The final two commands --- `carddescfront` and `carddescback` are used to put item descriptions on the front and back of the card.
+## License
+This project is released under the terms of the MIT License. See [LICENSE](LICENSE) for details.
 
-There are several options defined in the `itemCommands.tex` file. This allows for things like attunement, curses, and a few other predefined macros.
-
-I have included the items for Moons Over Graymoor, including letters and a spell scroll if you are curious.
-
-
-In the `dndItemCards.tex` file, an array is defined for all the cards to be included.
-```
-\def\cardfiles{arrowShapechangerSlaying, cardArrowHead, LetterFromLadySybil, SerThamesFinishedLetter, SerThamesUnfinishedLetter, ScrollOfMoonbeam, MoonTouchedSword}
-```
-To quickly generate a list, you can use
-```
-ls cards | grep -Po '.*(?=\.)' | paste -sd, - | xclip -selection clipboard
-```
-to copy a comma-separated list of all files in the cards folder onto your clipboard.
-
-Run `pdflatex` (or your preferred engine), and things should be good.
-
-## Known issues
-I thew this together somewhat quickly, so this is by no means feature-full.
-
-* At the moment, this only works with up to 9 cards. I have not included any logic to switch to new pages after 9 cards. It is best to include 9 in a list, generate the PDF, and then run a new batch of 9.
-
-* The spillover from the front card description to the back card description is not automatic. The user must decide where this cutoff is.
-
-* There are some spacing issues. I'm working to fit everything in a US lettersize paper, and it just /barely/ doesn't fit. A combination of simple twiddling with margins, but perhaps better use of tikz and scaling would get proper results.
-
-* In working to shrink the card sizes to fit 9 on a sheet, the graphics backgrounds are an odd aspect ratio, and will get stretched in some strange ways.
-
-
+## Credits
+Based on work by DrailNecross and the [DnD 5e LaTeX Template](https://github.com/rpgtex/DND-5e-LaTeX-Template). Images are believed to be copyright free; please open an issue if you find otherwise.
