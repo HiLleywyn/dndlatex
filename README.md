@@ -43,8 +43,8 @@ This template requires a working LaTeX distribution such as TeX&nbsp;Live. `pdfl
 
 ### Creating New Cards
 Card files use the macros defined in `itemCommands.tex`. The most common commands are:
-- `\ItemTags{type}{rarity}{attune}{creature}` – item tags and attunement requirements.
-- `\FlavorText{flag}{text}` – italicized descriptive text.
+- `\ItemInfo{type}{rarity}{attune}{creature}[atk][def][school][dur][ac]` – item tags and property table in one command.
+- `\FlavorText{flag}{text}` – italicised descriptive text.
 - `\ChargeMechanics` and `\SpellCasting` – mechanics for charged and spell‑casting items.
 - `\BonusText` and `\CurseText` – additional effects and curses.
 - `\WeaponStatBlock{damage}{weight}{properties}` – table of weapon statistics.
