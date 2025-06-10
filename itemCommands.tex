@@ -152,6 +152,20 @@
   \textbf{Duration: } {\ifnum#7=1  Concentration,  \fi} #6\\
   \textbf{Components: } {#8}\\[2ex]
 }
+
+% Generic property table for uniform formatting across cards
+\NewDocumentCommand{\CardPropertyBlock}{O{--} O{--} O{--} O{--} O{--}}{% attack, defense, school, duration, ac
+  \begin{center}
+    \begin{tabular}{@{}ll@{}}
+      \textbf{Attack} & #1\\
+      \textbf{Defense} & #2\\
+      \textbf{Spell School} & #3\\
+      \textbf{Duration} & #4\\
+      \textbf{AC} & #5\\
+    \end{tabular}
+  \end{center}
+  \vspace{0.5ex}
+}
 % \begin{itemcard}{Item Name}
 %     \begin{center}
 %       \begin{tcolorbox}[width=\linewidth, boxrule=3.0pt, colframe=black, colback=white, boxsep=0pt, top=0pt, bottom=0pt, left=0pt, right=0pt, center={yshift=-5mm}]
