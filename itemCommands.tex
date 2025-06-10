@@ -1,89 +1,59 @@
 % Custom command definitions for D&D item cards
 % Requires the xparse package for \NewDocumentCommand macros
 
-\newcommand{\ItemTags}[4]{% #1=item type, #2=rarity, #3=attunement type (0=none, 1=attunement, 2=special), #4=special attunement requirement
-    \ifnum#3=0
-        \textbf{#1, #2 }
-        \\[0.1ex]
-
-    \fi
-
-    \ifnum#3=1
-        \textbf{#1, #2 (requires attunement)}
-        \\[0.1ex]
-
-    \fi
-
-    \ifnum#3=2
-        \textbf{#1, #2 (requires attunement by a #4)}
-        \\[0.1ex]
-
-    \fi
-
-
+% Item type and rarity with optional attunement requirement
+\NewDocumentCommand{\ItemTags}{m m m m}{%
+  \ifnum#3=0
+    \textbf{#1, #2 }\\[0.1ex]
+  \fi
+  \ifnum#3=1
+    \textbf{#1, #2 (requires attunement)}\\[0.1ex]
+  \fi
+  \ifnum#3=2
+    \textbf{#1, #2 (requires attunement by a #4)}\\[0.1ex]
+  \fi
 }
 
-\newcommand{\FlavorText}[2]{%#1=1 for flavor text, #2=flavor text
-    \ifnum#1=1
-        #2
-        \\[0.1ex]
-
-    \fi
+% Optional italicised flavor text
+\NewDocumentCommand{\FlavorText}{m m}{%
+  \ifnum#1=1
+    {\itshape #2}\\[0.1ex]
+  \fi
 }
 
-\newcommand{\ChargeMechanics}[9]{% #1=total charges, #2=dice num, #3=dice sides, #4=modifier, #5=reset time, #6=1 for special charge condition, #7=special charge condition, #8=1 for last charge effect, #9=last charge effect
-    \ifnum#1>1
-        This item has #1 charges and regains #2d#3 + #4 expended charges daily at #5.
-        \ifnum#6=1
-            #7
-        \fi
-        \ifnum#8=1
-            #9
-        \fi
-        \\[0.25ex]
-
-    \fi
-    \ifnum#1=1
-        This item has #1 charge and regains #2d#3 + #4 expended charges daily at #5.
-        \ifnum#6=1
-            #7
-        \fi
-        \ifnum#8=1
-            #9
-        \fi
-        \\[0.25ex]
-
-    \fi
-
+% Mechanics for charged items
+\NewDocumentCommand{\ChargeMechanics}{m m m m m m m m m}{%
+  \ifnum#1>1
+    This item has #1 charges and regains #2d#3 + #4 expended charges daily at #5.
+  \else
+    This item has #1 charge and regains #2d#3 + #4 expended charges daily at #5.
+  \fi
+  \ifnum#6=1 #7 \fi
+  \ifnum#8=1 #9 \fi\\[0.25ex]
 }
 
-\newcommand{\SpellCasting}[6]{% #1=1 for spellcasting, #2=spell bonus, #3=spell bonus condition, #4=1 for additional spell effects, #5=spells, #6=additional spell effects
+% Block describing spells granted by the item
+\NewDocumentCommand{\SpellCasting}{m m m m m m}{%
   \ifnum#1=1
     \textbf{Spells. }
     \ifnum#2>0
-        You gain a +#2 bonus to your spell #3
+      You gain a +#2 bonus to your spell #3
     \fi
     #5
-    \ifnum#4=1
-        #6
-    \fi
-    \\[0.25ex]
-
-  \fi
-
-}
-\newcommand{\CurseText}[2]{% #1=1 for curse, #2 for curse text
-  \ifnum#1=1
-    \textbf{Curse.} #2
-    \\[0.25ex]
-
+    \ifnum#4=1 #6 \fi\\[0.25ex]
   \fi
 }
-\newcommand{\BonusText}[3]{% #1=1 for bonus text, #2 for title, #3 for text
+% Optional curse text
+\NewDocumentCommand{\CurseText}{m m}{%
   \ifnum#1=1
-    \textbf{#2.} #3
-    \\[0.1ex]
+    \textbf{Curse.} #2\\[0.25ex]
+  \fi
+}
 
+% Generic bonus paragraph
+\NewDocumentCommand{\BonusText}{m m m}{%
+  \ifnum#1=1
+    \textbf{#2.} #3\\[0.1ex]
   \fi
 }
 
@@ -95,7 +65,8 @@
       #1 & #2 & #3
     \end{tabular}
   \end{center}
-  \vspace{0.5ex}
+  % Reduced extra space below table
+  \vspace{0.25ex}
 }
 
 % Armor statistics table
@@ -106,7 +77,8 @@
       #1 & #2 & #3 & #4
     \end{tabular}
   \end{center}
-  \vspace{0.5ex}
+  % Reduced extra space below table
+  \vspace{0.25ex}
 }
 
 % Simplified creature or NPC stat block
@@ -121,7 +93,7 @@
       #4 & #5 & #6 & #7 & #8 & #9
     \end{tabular}
   \end{center}
-  \vspace{0.5ex}
+  \vspace{0.25ex}
 }
 
 % Schools are:
@@ -151,6 +123,26 @@
   \textbf{Casting Time: }#4 \hfill \textbf{Range: }#5\\
   \textbf{Duration: } {\ifnum#7=1  Concentration,  \fi} #6\\
   \textbf{Components: } {#8}\\[2ex]
+}
+
+% Generic property table for uniform formatting across cards
+\NewDocumentCommand{\CardPropertyBlock}{O{--} O{--} O{--} O{--} O{--}}{% attack, defense, school, duration, ac
+  \begin{center}
+    \begin{tabular}{@{}ll@{}}
+      \textbf{Attack} & \ifthenelse{\equal{#1}{--} \OR \equal{#1}{}}{N/A}{#1}\\
+      \textbf{Defense} & \ifthenelse{\equal{#2}{--} \OR \equal{#2}{}}{N/A}{#2}\\
+      \textbf{Spell School} & \ifthenelse{\equal{#3}{--} \OR \equal{#3}{}}{N/A}{#3}\\
+      \textbf{Duration} & \ifthenelse{\equal{#4}{--} \OR \equal{#4}{}}{N/A}{#4}\\
+      \textbf{AC} & \ifthenelse{\equal{#5}{--} \OR \equal{#5}{}}{N/A}{#5}\\
+    \end{tabular}
+  \end{center}
+  \vspace{0.25ex}
+}
+
+% Combined helper that outputs item tags followed by the property table
+\NewDocumentCommand{\ItemInfo}{m m m m O{--} O{--} O{--} O{--} O{--}}{%
+  \ItemTags{#1}{#2}{#3}{#4}
+  \CardPropertyBlock[#5][#6][#7][#8][#9]
 }
 % \begin{itemcard}{Item Name}
 %     \begin{center}

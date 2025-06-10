@@ -16,6 +16,7 @@
 \tcbuselibrary{skins}
 \usepackage{afterpage} % For controlling page breaks
 \usepackage{ifthen} % Add the ifthen package
+\usepackage{adjustbox} % Auto-scale long descriptions
 \usepackage{mathptmx} % font looks much better at smaller sizes!
 
 %\captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
@@ -57,7 +58,8 @@
 
 
 \begin{document}
-\fontsize{7.5}{8.5}\selectfont
+% Slightly smaller default font so text fits comfortably
+\fontsize{7}{8}\selectfont
 % ---- FRONT SIDE ----
 \begin{tikzpicture}
     \newcount\index
@@ -65,8 +67,18 @@
     \foreach \filename in \cardfiles {%
         \begingroup % Ensures scope is properly handled
 
-        \pgfmathtruncatemacro{\i}{\index / 3}  % Row index
+        \pgfmathtruncatemacro{\i}{mod(\index,9) / 3}  % Row index within page
         \pgfmathtruncatemacro{\j}{mod(\index, 3)} % Column index
+
+        % Start a new page every nine cards
+        \ifnum\index>0
+            \pgfmathtruncatemacro{\r}{mod(\index,9)}
+            \ifnum\r=0
+                \end{tikzpicture}
+                \newpage
+                \begin{tikzpicture}
+            \fi
+        \fi
 
         % Reset macros before loading new card
         \renewcommand{\cardtitle}{Useless Rock}
@@ -82,16 +94,14 @@
         % Draw the card
         \node[minimum width=\cardwidth, minimum height=\cardheight, draw, rectangle, fill=white, scale=1] at  ({\j * (\cardwidth + 0.12in)}, {-\i * (\cardheight + 0.02in)}) {%
             \begin{itemcard}{\cardtitle}
-                \begin{center}
-                    % Details in bottom of itemCommands.tex
-                    \begin{tcolorbox}[width=\linewidth, boxrule=1.5pt, colframe=black,  boxsep=0pt, top=0pt, bottom=0pt, left=0pt, right=0pt, enhanced, borderline={0.5mm}{0mm}{black}, interior style={fill stretch image=\cardbg}]
-                        \begin{center}
-                            \includegraphics[height=0.20\cardheight]{\cardimage}
-                        \end{center}
-                    \end{tcolorbox}
-                \end{center}\vspace*{-1.5em}
+                \begin{upperpart}
+                    \centering
+                    \includegraphics[height=0.20\cardheight]{\cardimage}
+                \end{upperpart}\vspace*{-1em}
                 \begin{lowerpart}
-                    \carddescfront
+                    \begin{adjustbox}{minipage=\linewidth, max height=0.72\cardheight}
+                        \carddescfront
+                    \end{adjustbox}
                 \end{lowerpart}
            \end{itemcard}
         };
@@ -111,8 +121,18 @@
     \foreach \filename in \cardfiles {%
         \begingroup % Ensures scope is properly handled
 
-        \pgfmathtruncatemacro{\i}{\index / 3}  % Row index
+        \pgfmathtruncatemacro{\i}{mod(\index,9) / 3}  % Row index within page
         \pgfmathtruncatemacro{\j}{2 - mod(\index, 3)} % Mirror column for back side
+
+        % Start a new page every nine cards
+        \ifnum\index>0
+            \pgfmathtruncatemacro{\r}{mod(\index,9)}
+            \ifnum\r=0
+                \end{tikzpicture}
+                \newpage
+                \begin{tikzpicture}
+            \fi
+        \fi
 
         % Reset macros before loading new card
         \renewcommand{\cardtitle}{Useless Rock}

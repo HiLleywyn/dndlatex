@@ -13,9 +13,13 @@ A collection of LaTeX sources for printing item cards in the style of the fifth 
 - [Credits](#credits)
 
 ## Features
-- Up to nine cards per sheet with mirrored backs for double‑sided printing.
+- Automatic pagination with mirrored backs for double‑sided printing.
 - Item information lives in individual files for easy re‑use.
 - Backgrounds and item art are fully customizable.
+- Background images are clipped to each card and scale without stretching.
+- Artwork panels use a dedicated `upperpart` box so backgrounds never bleed onto
+  other cards.
+- Long descriptions automatically shrink to fit the front side.
 - Utility macros for item tags, flavor text, charges, spellcasting and more.
 
 ## Repository Layout
@@ -41,21 +45,21 @@ This template requires a working LaTeX distribution such as TeX&nbsp;Live. `pdfl
 
 ### Creating New Cards
 Card files use the macros defined in `itemCommands.tex`. The most common commands are:
-- `\ItemTags{type}{rarity}{attune}{creature}` – item tags and attunement requirements.
-- `\FlavorText{flag}{text}` – italicized descriptive text.
+- `\ItemInfo{type}{rarity}{attune}{creature}[atk][def][school][dur][ac]` – item tags and property table in one command.
+- `\FlavorText{flag}{text}` – italicised descriptive text.
 - `\ChargeMechanics` and `\SpellCasting` – mechanics for charged and spell‑casting items.
 - `\BonusText` and `\CurseText` – additional effects and curses.
 - `\WeaponStatBlock{damage}{weight}{properties}` – table of weapon statistics.
 - `\ArmorStatBlock{ac}{strength}{stealth}{weight}` – table of armor statistics.
 - `\CreatureStats{ac}{hp}{speed}{str}{dex}{con}{int}{wis}{cha}{cr}` – simple creature or NPC stat block.
+- `\CardPropertyBlock[atk][def][school][dur][ac]` – property table styled like `\WeaponStatBlock`; missing values display `N/A`.
+- `\begin{upperpart} ... \end{upperpart}` – fixed-height box for artwork using
+  `\cardbg` as its background.
 
 See the existing files in the `cards/` directory for examples.
 
 ## Known Issues
-- Currently limited to nine cards per sheet. Additional pages must be generated manually.
-- Descriptions do not automatically overflow from the front to the back side.
-- Slight spacing adjustments may be required when customising card sizes or graphics.
-- Background images may appear stretched when non‑standard aspect ratios are used.
+Currently none.
 
 ## License
 This project is released under the terms of the MIT License. See [LICENSE](LICENSE) for details.
