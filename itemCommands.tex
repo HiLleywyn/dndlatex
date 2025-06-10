@@ -87,6 +87,43 @@
   \fi
 }
 
+% Weapon statistics table
+\newcommand{\WeaponStatBlock}[3]{%
+  \begin{center}
+    \begin{tabular}{ccc}
+      \textbf{Damage} & \textbf{Weight} & \textbf{Properties}\\
+      #1 & #2 & #3
+    \end{tabular}
+  \end{center}
+  \vspace{0.5ex}
+}
+
+% Armor statistics table
+\newcommand{\ArmorStatBlock}[4]{%
+  \begin{center}
+    \begin{tabular}{cccc}
+      \textbf{AC} & \textbf{Strength} & \textbf{Stealth} & \textbf{Weight}\\
+      #1 & #2 & #3 & #4
+    \end{tabular}
+  \end{center}
+  \vspace{0.5ex}
+}
+
+% Simplified creature or NPC stat block
+\newcommand{\CreatureStats}[10]{%
+  \begin{center}
+    \begin{tabular}{cccc}
+      \textbf{AC} & \textbf{HP} & \textbf{Speed} & \textbf{CR}\\
+      #1 & #2 & #3 & #10
+    \end{tabular}\\[1ex]
+    \begin{tabular}{cccccc}
+      \textbf{STR} & \textbf{DEX} & \textbf{CON} & \textbf{INT} & \textbf{WIS} & \textbf{CHA}\\
+      #4 & #5 & #6 & #7 & #8 & #9
+    \end{tabular}
+  \end{center}
+  \vspace{0.5ex}
+}
+
 % Schools are:
 %Abjuration, Conjuration, Divination, Enchantment, Evocation, Illusion, Necromancy, Transmutation
 \newcommand{\SpellCardText}[8]{% #1=Spell name, #2=level[10 to turn off], #3=school, #4=casting time, #5=Range, #6=duration, #7={1-concentration, 0-not}, #8=Components
