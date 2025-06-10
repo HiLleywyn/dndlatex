@@ -94,14 +94,10 @@
         % Draw the card
         \node[minimum width=\cardwidth, minimum height=\cardheight, draw, rectangle, fill=white, scale=1] at  ({\j * (\cardwidth + 0.12in)}, {-\i * (\cardheight + 0.02in)}) {%
             \begin{itemcard}{\cardtitle}
-                \begin{center}
-                    % Details in bottom of itemCommands.tex
-                    \begin{tcolorbox}[width=\linewidth, boxrule=1.5pt, colframe=black,  boxsep=0pt, top=0pt, bottom=0pt, left=0pt, right=0pt, enhanced, borderline={0.5mm}{0mm}{black}, interior style={clip, fill overzoom image=\cardbg}]
-                        \begin{center}
-                            \includegraphics[height=0.20\cardheight]{\cardimage}
-                        \end{center}
-                    \end{tcolorbox}
-                \end{center}\vspace*{-1.5em}
+                \begin{upperpart}
+                    \centering
+                    \includegraphics[height=0.20\cardheight]{\cardimage}
+                \end{upperpart}\vspace*{-1em}
                 \begin{lowerpart}
                     \begin{adjustbox}{minipage=\linewidth, max height=0.72\cardheight}
                         \carddescfront

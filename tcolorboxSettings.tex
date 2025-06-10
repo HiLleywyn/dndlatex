@@ -75,6 +75,22 @@
   #1
 }
 
+% New upper part with fixed height for card artwork
+\newtcolorbox{upperpart}[1][height=0.24\cardheight]{
+  boxrule=1.5pt,
+  colframe=black,
+  coltext=black,
+  enhanced,
+  borderline={0.5mm}{0mm}{black},
+  left=1pt,right=1pt,top=1pt,bottom=1pt,
+  interior style={
+    clip,
+    fill overzoom image=\cardbg,
+    fill image opacity=1,
+  },
+  #1
+}
+
 \newtcolorbox{backpart}[1][height=0.88\cardheight]{
     boxrule=1.5pt,
     colframe=black,
