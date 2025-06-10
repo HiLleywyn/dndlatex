@@ -16,6 +16,8 @@ A collection of LaTeX sources for printing item cards in the style of the fifth 
 - Automatic pagination with mirrored backs for double‑sided printing.
 - Item information lives in individual files for easy re‑use.
 - Backgrounds and item art are fully customizable.
+- Background images are clipped to each card and scale without stretching.
+- Long descriptions automatically shrink to fit the front side.
 - Utility macros for item tags, flavor text, charges, spellcasting and more.
 
 ## Repository Layout
@@ -53,8 +55,7 @@ Card files use the macros defined in `itemCommands.tex`. The most common command
 See the existing files in the `cards/` directory for examples.
 
 ## Known Issues
-- Descriptions do not automatically overflow from the front to the back side.
-- Slight spacing adjustments may be required when customising card sizes or graphics.
+Currently none.
 
 ## License
 This project is released under the terms of the MIT License. See [LICENSE](LICENSE) for details.

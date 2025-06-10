@@ -16,6 +16,7 @@
 \tcbuselibrary{skins}
 \usepackage{afterpage} % For controlling page breaks
 \usepackage{ifthen} % Add the ifthen package
+\usepackage{adjustbox} % Auto-scale long descriptions
 \usepackage{mathptmx} % font looks much better at smaller sizes!
 
 %\captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
@@ -95,14 +96,16 @@
             \begin{itemcard}{\cardtitle}
                 \begin{center}
                     % Details in bottom of itemCommands.tex
-                    \begin{tcolorbox}[width=\linewidth, boxrule=1.5pt, colframe=black,  boxsep=0pt, top=0pt, bottom=0pt, left=0pt, right=0pt, enhanced, borderline={0.5mm}{0mm}{black}, interior style={fill overzoom image=\cardbg}]
+                    \begin{tcolorbox}[width=\linewidth, boxrule=1.5pt, colframe=black,  boxsep=0pt, top=0pt, bottom=0pt, left=0pt, right=0pt, enhanced, borderline={0.5mm}{0mm}{black}, interior style={clip, fill overzoom image=\cardbg}]
                         \begin{center}
                             \includegraphics[height=0.20\cardheight]{\cardimage}
                         \end{center}
                     \end{tcolorbox}
                 \end{center}\vspace*{-1.5em}
                 \begin{lowerpart}
-                    \carddescfront
+                    \begin{adjustbox}{minipage=\linewidth, max height=0.72\cardheight}
+                        \carddescfront
+                    \end{adjustbox}
                 \end{lowerpart}
            \end{itemcard}
         };
