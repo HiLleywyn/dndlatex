@@ -1,5 +1,5 @@
 % Custom command definitions for D&D item cards
-% Add your command definitions here
+% Requires the xparse package for \NewDocumentCommand macros
 
 \newcommand{\ItemTags}[4]{% #1=item type, #2=rarity, #3=attunement type (0=none, 1=attunement, 2=special), #4=special attunement requirement
     \ifnum#3=0
@@ -88,7 +88,7 @@
 }
 
 % Weapon statistics table
-\newcommand{\WeaponStatBlock}[3]{%
+\NewDocumentCommand{\WeaponStatBlock}{m m m}{%
   \begin{center}
     \begin{tabular}{ccc}
       \textbf{Damage} & \textbf{Weight} & \textbf{Properties}\\
@@ -99,7 +99,7 @@
 }
 
 % Armor statistics table
-\newcommand{\ArmorStatBlock}[4]{%
+\NewDocumentCommand{\ArmorStatBlock}{m m m m}{%
   \begin{center}
     \begin{tabular}{cccc}
       \textbf{AC} & \textbf{Strength} & \textbf{Stealth} & \textbf{Weight}\\
@@ -110,7 +110,7 @@
 }
 
 % Simplified creature or NPC stat block
-\newcommand{\CreatureStats}[10]{%
+\NewDocumentCommand{\CreatureStats}{m m m m m m m m m m}{%
   \begin{center}
     \begin{tabular}{cccc}
       \textbf{AC} & \textbf{HP} & \textbf{Speed} & \textbf{CR}\\
