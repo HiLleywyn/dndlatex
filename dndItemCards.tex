@@ -65,8 +65,18 @@
     \foreach \filename in \cardfiles {%
         \begingroup % Ensures scope is properly handled
 
-        \pgfmathtruncatemacro{\i}{\index / 3}  % Row index
+        \pgfmathtruncatemacro{\i}{mod(\index,9) / 3}  % Row index within page
         \pgfmathtruncatemacro{\j}{mod(\index, 3)} % Column index
+
+        % Start a new page every nine cards
+        \ifnum\index>0
+            \pgfmathtruncatemacro{\r}{mod(\index,9)}
+            \ifnum\r=0
+                \end{tikzpicture}
+                \newpage
+                \begin{tikzpicture}
+            \fi
+        \fi
 
         % Reset macros before loading new card
         \renewcommand{\cardtitle}{Useless Rock}
@@ -84,7 +94,7 @@
             \begin{itemcard}{\cardtitle}
                 \begin{center}
                     % Details in bottom of itemCommands.tex
-                    \begin{tcolorbox}[width=\linewidth, boxrule=1.5pt, colframe=black,  boxsep=0pt, top=0pt, bottom=0pt, left=0pt, right=0pt, enhanced, borderline={0.5mm}{0mm}{black}, interior style={fill stretch image=\cardbg}]
+                    \begin{tcolorbox}[width=\linewidth, boxrule=1.5pt, colframe=black,  boxsep=0pt, top=0pt, bottom=0pt, left=0pt, right=0pt, enhanced, borderline={0.5mm}{0mm}{black}, interior style={fill overzoom image=\cardbg}]
                         \begin{center}
                             \includegraphics[height=0.20\cardheight]{\cardimage}
                         \end{center}
@@ -111,8 +121,18 @@
     \foreach \filename in \cardfiles {%
         \begingroup % Ensures scope is properly handled
 
-        \pgfmathtruncatemacro{\i}{\index / 3}  % Row index
+        \pgfmathtruncatemacro{\i}{mod(\index,9) / 3}  % Row index within page
         \pgfmathtruncatemacro{\j}{2 - mod(\index, 3)} % Mirror column for back side
+
+        % Start a new page every nine cards
+        \ifnum\index>0
+            \pgfmathtruncatemacro{\r}{mod(\index,9)}
+            \ifnum\r=0
+                \end{tikzpicture}
+                \newpage
+                \begin{tikzpicture}
+            \fi
+        \fi
 
         % Reset macros before loading new card
         \renewcommand{\cardtitle}{Useless Rock}

@@ -13,7 +13,7 @@ A collection of LaTeX sources for printing item cards in the style of the fifth 
 - [Credits](#credits)
 
 ## Features
-- Up to nine cards per sheet with mirrored backs for double‑sided printing.
+- Automatic pagination with mirrored backs for double‑sided printing.
 - Item information lives in individual files for easy re‑use.
 - Backgrounds and item art are fully customizable.
 - Utility macros for item tags, flavor text, charges, spellcasting and more.
@@ -52,10 +52,9 @@ Card files use the macros defined in `itemCommands.tex`. The most common command
 See the existing files in the `cards/` directory for examples.
 
 ## Known Issues
-- Currently limited to nine cards per sheet. Additional pages must be generated manually.
 - Descriptions do not automatically overflow from the front to the back side.
 - Slight spacing adjustments may be required when customising card sizes or graphics.
-- Background images may appear stretched when non‑standard aspect ratios are used.
+- Background images may appear stretched when non‑standard aspect ratios are used, though the default templates now try to preserve aspect ratio.
 
 ## License
 This project is released under the terms of the MIT License. See [LICENSE](LICENSE) for details.
