@@ -129,11 +129,11 @@
 \NewDocumentCommand{\CardPropertyBlock}{O{--} O{--} O{--} O{--} O{--}}{% attack, defense, school, duration, ac
   \begin{center}
     \begin{tabular}{@{}ll@{}}
-      \textbf{Attack} & \ifthenelse{\equal{#1}{--} \OR \equal{#1}{}}{N/A}{#1}\\
-      \textbf{Defense} & \ifthenelse{\equal{#2}{--} \OR \equal{#2}{}}{N/A}{#2}\\
-      \textbf{Spell School} & \ifthenelse{\equal{#3}{--} \OR \equal{#3}{}}{N/A}{#3}\\
-      \textbf{Duration} & \ifthenelse{\equal{#4}{--} \OR \equal{#4}{}}{N/A}{#4}\\
-      \textbf{AC} & \ifthenelse{\equal{#5}{--} \OR \equal{#5}{}}{N/A}{#5}\\
+      \ifthenelse{\equal{#1}{--} \OR \equal{#1}{}}{}{\textbf{Attack} & #1\\}
+      \ifthenelse{\equal{#2}{--} \OR \equal{#2}{}}{}{\textbf{Defense} & #2\\}
+      \ifthenelse{\equal{#3}{--} \OR \equal{#3}{}}{}{\textbf{Spell School} & #3\\}
+      \ifthenelse{\equal{#4}{--} \OR \equal{#4}{}}{}{\textbf{Duration} & #4\\}
+      \ifthenelse{\equal{#5}{--} \OR \equal{#5}{}}{}{\textbf{AC} & #5\\}
     \end{tabular}
   \end{center}
   \vspace{0.25ex}

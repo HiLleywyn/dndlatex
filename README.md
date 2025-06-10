@@ -18,7 +18,7 @@ A collection of LaTeX sources for printing item cards in the style of the fifth 
 - Backgrounds and item art are fully customizable.
 - Background images are clipped to each card and scale without stretching.
 - Artwork panels use a dedicated `upperpart` box so backgrounds never bleed onto
-  other cards.
+  other cards, and the entire card is clipped so backgrounds never extend past the rounded corners.
 - Long descriptions automatically shrink to fit the front side.
 - Utility macros for item tags, flavor text, charges, spellcasting and more.
 
@@ -52,7 +52,7 @@ Card files use the macros defined in `itemCommands.tex`. The most common command
 - `\WeaponStatBlock{damage}{weight}{properties}` – table of weapon statistics.
 - `\ArmorStatBlock{ac}{strength}{stealth}{weight}` – table of armor statistics.
 - `\CreatureStats{ac}{hp}{speed}{str}{dex}{con}{int}{wis}{cha}{cr}` – simple creature or NPC stat block.
-- `\CardPropertyBlock[atk][def][school][dur][ac]` – property table styled like `\WeaponStatBlock`; missing values display `N/A`.
+ - `\CardPropertyBlock[atk][def][school][dur][ac]` – compact property table; blank fields are omitted entirely.
 - `\begin{upperpart} ... \end{upperpart}` – fixed-height box for artwork using
   `\cardbg` as its background.
 
