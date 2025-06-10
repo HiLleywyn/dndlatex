@@ -2,8 +2,6 @@
 
 A collection of LaTeX sources for printing item cards in the style of the fifth edition of "the world's greatest roleplaying game." The project packages card layouts, custom macros and example items so that you can quickly typeset professional looking handouts.
 
-![Preview of a generated page](ExamplePage.png)
-
 ## Table of Contents
 - [Features](#features)
 - [Repository Layout](#repository-layout)
