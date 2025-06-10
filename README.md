@@ -48,7 +48,7 @@ Card files use the macros defined in `itemCommands.tex`. The most common command
 - `\WeaponStatBlock{damage}{weight}{properties}` – table of weapon statistics.
 - `\ArmorStatBlock{ac}{strength}{stealth}{weight}` – table of armor statistics.
 - `\CreatureStats{ac}{hp}{speed}{str}{dex}{con}{int}{wis}{cha}{cr}` – simple creature or NPC stat block.
-- `\CardPropertyBlock[atk][def][school][dur][ac]` – uniform table for common item properties.
+- `\CardPropertyBlock[atk][def][school][dur][ac]` – property table styled like `\WeaponStatBlock`; blank entries are omitted.
 
 See the existing files in the `cards/` directory for examples.
 
